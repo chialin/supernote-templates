@@ -38,9 +38,11 @@
   場景: 批次生成腳本正確配置
     假設 存在檔案 "scripts/generate-all.js"
     當 讀取該檔案內容
-    那麼 應該定義 templates 陣列
+    那麼 應該使用 fs.readdirSync() 或類似方法自動掃描 templates/ 目錄
+    並且 應該過濾出所有 .html 檔案
     並且 應該定義 devices 陣列包含 ['nomad', 'manta']
-    並且 應該使用雙層迴圈遍歷所有模板和裝置組合
+    並且 應該使用雙層迴圈遍歷所有模板檔案和裝置組合
+    並且 不應包含硬編碼的 templates 陣列
 
   場景: package.json 包含正確的 npm scripts
     假設 存在檔案 "package.json"
@@ -67,11 +69,23 @@
 
   場景: 批次生成所有模板和裝置組合
     假設 專案已完成所有重構
+    並且 templates/ 目錄下有多個 HTML 檔案
     當 執行指令 "npm run generate"
     那麼 應該成功執行不報錯
+    並且 應該自動掃描 templates/ 目錄下所有 .html 檔案
+    並且 應該為每個 HTML 檔案生成 Nomad 和 Manta 兩個版本
     並且 應該生成檔案 "dist/nomad/daily-tasks.png"
     並且 應該生成檔案 "dist/manta/daily-tasks.png"
-    並且 兩個檔案都應為有效的 PNG 圖片
+    並且 所有生成的檔案都應為有效的 PNG 圖片
+
+  場景: 新增模板自動被掃描
+    假設 專案已完成所有重構
+    並且 templates/ 目錄下已有 "daily-tasks.html"
+    當 在 templates/ 目錄新增檔案 "weekly-plan.html"
+    並且 執行指令 "npm run generate"
+    那麼 應該自動掃描並生成 "dist/nomad/weekly-plan.png"
+    並且 應該自動掃描並生成 "dist/manta/weekly-plan.png"
+    並且 無需修改 generate-all.js 程式碼
 
   場景: 瀏覽器中測試 Media Query 切換
     假設 在瀏覽器中開啟 "templates/daily-tasks.html"

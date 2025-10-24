@@ -56,24 +56,26 @@
 
 - [ ] 4. 建立批次生成腳本和工作流程
   - 4.1 建立 `scripts/generate-all.js`
-  - 4.2 定義 templates 陣列（目前只有 'daily-tasks'，未來可擴展）
-  - 4.3 定義 devices 陣列（['nomad', 'manta']）
-  - 4.4 使用雙層迴圈遍歷所有模板和裝置組合
-  - 4.5 呼叫 convertHtmlToPng 生成每個組合的 PNG
-  - 4.6 在 package.json 新增 npm scripts：
-    - `"generate": "node scripts/generate-all.js"` - 生成所有模板的所有裝置版本
+  - 4.2 使用 Node.js fs 模組讀取 `templates/` 目錄下所有 `.html` 檔案
+  - 4.3 使用 `fs.readdirSync()` 或 `glob` 自動掃描 templates 目錄，過濾出所有 .html 檔案
+  - 4.4 定義 devices 陣列（['nomad', 'manta']）
+  - 4.5 使用雙層迴圈遍歷所有模板檔案和裝置組合
+  - 4.6 呼叫 convertHtmlToPng 生成每個組合的 PNG
+  - 4.7 在 package.json 新增 npm scripts：
+    - `"generate": "node scripts/generate-all.js"` - 自動掃描 templates/ 並生成所有模板的所有裝置版本
     - `"generate:nomad": "node scripts/convert-to-png.js templates/daily-tasks.html nomad"` - 僅生成 Nomad 版本
     - `"generate:manta": "node scripts/convert-to-png.js templates/daily-tasks.html manta"` - 僅生成 Manta 版本
-  - 4.7 更新 `.gitignore` 忽略 `dist/` 目錄
-  - 4.8 測試：執行 `npm run generate` 確認所有版本都正確生成
+  - 4.8 更新 `.gitignore` 忽略 `dist/` 目錄
+  - 4.9 測試：執行 `npm run generate` 確認所有 templates/ 下的 HTML 都正確生成兩個裝置版本
 
 - [ ] 5. 撰寫專案文件
   - 5.1 更新 README.md 說明專案結構
-  - 5.2 說明如何開發新模板：複製現有模板 → 引入 devices.css → 使用 CSS 變數 → 執行 generate
+  - 5.2 說明如何開發新模板：在 templates/ 目錄新增 HTML 檔案 → 引入 devices.css → 使用 CSS 變數 → 執行 generate 自動生成
   - 5.3 說明如何調整裝置參數：修改 styles/devices.css 中的變數值
   - 5.4 說明如何新增裝置：在 devices.css 新增 Media Query、在 convert-to-png.js 新增 deviceConfig、在 generate-all.js 新增到 devices 陣列
-  - 5.5 列出可用的 npm scripts 和其用途
-  - 5.6 說明目錄結構和檔案用途
+  - 5.5 強調 generate-all.js 會自動掃描 templates/ 目錄，無需手動維護模板清單
+  - 5.6 列出可用的 npm scripts 和其用途
+  - 5.7 說明目錄結構和檔案用途
 
 - [ ] 6. 驗證和測試
   - 6.1 在瀏覽器中開啟 templates/daily-tasks.html，調整視窗大小驗證 Media Query 正確切換
