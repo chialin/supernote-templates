@@ -1,0 +1,12 @@
+{
+  "name": "html-to-png-converter",
+  "version": "1.0.0",
+  "description": "Convert HTML to PNG using Puppeteer",
+  "main": "convert-to-png.js",
+  "scripts": {
+    "convert": "node convert-to-png.js"
+  },
+  "dependencies": {
+    "puppeteer": "^24.26.1"
+  }
+}

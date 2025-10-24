@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Tasks</title>
+    <style>
+        :root {
+            --font-size-lg: 44px;
+            --font-size-md: 24px;
+            --font-size-sm: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            padding: 0;
+            margin: 0;
+            width: 1404px;
+            height: 1872px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: 15px 15px 150px 150px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .date-section {
+            margin-bottom: 12px;
+            font-size: var(--font-size-md);
+            display: flex;
+            gap: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #000;
+        }
+
+        .date-field {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .date-field label {
+            font-weight: bold;
+        }
+
+        .date-input {
+            border: none;
+            border-bottom: 1px solid #000;
+            width: 120px;
+            padding: 2px 4px;
+            font-size: var(--font-size-md);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* Task Tracker Grid */
+        .tracker-section {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .tracker-title {
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            text-align: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+            flex-shrink: 0;
+            display: none;
+        }
+
+        .tracker-grid {
+            border: 1px solid #000;
+            border-collapse: collapse;
+            font-size: var(--font-size-md);
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tracker-grid tbody {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .tracker-grid tr {
+            display: flex;
+            flex: 1;
+        }
+
+        .tracker-grid td {
+            border: 1px solid #000;
+            text-align: center;
+            vertical-align: middle;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tracker-grid thead tr {
+            flex: 0 0 auto;
+        }
+
+        .tracker-grid th {
+            border: 1px solid #000;
+            padding: 4px;
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .row-label {
+            font-weight: bold;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* Right Section */
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 0;
+        }
+
+        .month-section {
+            flex: 0 0 auto;
+        }
+
+        .month-title {
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #000;
+            padding: 5px;
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+        }
+
+        .month-item {
+            border: 1px solid #000;
+            padding: 5px 4px;
+            text-align: center;
+            font-size: var(--font-size-md);
+            font-weight: 500;
+        }
+
+        /* Key Section */
+        .key-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .key-title {
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #000;
+            padding: 5px;
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+
+        .key-grid {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            gap: 1px;
+            flex: 1;
+            overflow-y: auto;
+            row-gap: 2px;
+        }
+
+        .key-item {
+            padding: 4px;
+            font-size: var(--font-size-md);
+            text-align: center;
+            height: auto;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .key-item.number {
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+        }
+
+        .key-item.blank {
+            border-bottom: 1px solid #000;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            height: auto;
+            min-height: 22px;
+        }
+
+        /* Notes Section */
+        .notes-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .notes-title {
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #000;
+            padding: 5px;
+            margin-bottom: 4px;
+            flex-shrink: 0;
+        }
+
+        .notes-box {
+            border: 1px solid #000;
+            flex: 1;
+            padding: 8px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>DAILY TASKS</h1>
+        </div>
+
+        <!-- Date Section -->
+        <div class="date-section">
+            <div class="date-field">
+                <label>Date:</label>
+                <input type="text" class="date-input">
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left: Task Tracker Grid -->
+            <div class="tracker-section">
+                <div class="tracker-title">TASK TRACKER</div>
+                <table class="tracker-grid">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">1</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">2</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">3</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">4</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">5</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">6</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">7</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">8</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">9</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">10</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">11</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">12</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">13</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">14</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">15</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">16</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">17</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">18</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">19</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">20</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">21</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">22</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">23</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">24</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">25</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">26</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">27</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">28</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">29</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">30</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">31</td>
+                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Right Section -->
+            <div class="right-section">
+                <!-- Month Selection -->
+                <div class="month-section">
+                    <div class="month-title">MONTH</div>
+                    <div class="month-grid">
+                        <div class="month-item">JAN</div>
+                        <div class="month-item">FEB</div>
+                        <div class="month-item">MAR</div>
+                        <div class="month-item">APR</div>
+                        <div class="month-item">MAY</div>
+                        <div class="month-item">JUN</div>
+                        <div class="month-item">JUL</div>
+                        <div class="month-item">AUG</div>
+                        <div class="month-item">SEP</div>
+                        <div class="month-item">OCT</div>
+                        <div class="month-item">NOV</div>
+                        <div class="month-item">DEC</div>
+                    </div>
+                </div>
+
+                <!-- Task Key -->
+                <div class="key-section">
+                    <div class="key-title">TASK / KEY</div>
+                    <div class="key-grid">
+                        <div class="key-item number">1.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">2.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">3.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">4.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">5.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">6.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">7.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">8.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">9.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">10.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">11.</div>
+                        <div class="key-item blank"></div>
+                        <div class="key-item number">12.</div>
+                        <div class="key-item blank"></div>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="notes-section">
+                    <div class="notes-title">NOTES</div>
+                    <div class="notes-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
