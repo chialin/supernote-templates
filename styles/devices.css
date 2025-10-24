@@ -1,0 +1,26 @@
+/* Supernote Device-Specific Styles */
+
+/* Shared styles for all devices (same DPI = same physical size) */
+:root {
+    --font-size-lg: 44px;
+    --font-size-md: 24px;
+    --font-size-sm: 10px;
+    --safe-area-top: 15px;
+    --safe-area-right: 15px;
+    --safe-area-bottom: 150px;
+    --safe-area-left: 150px;
+}
+
+/* Nomad (A6 X2) - Default device dimensions */
+:root {
+    --device-width: 1404px;
+    --device-height: 1872px;
+}
+
+/* Manta (A5 X2) - Override device dimensions only */
+@media (min-width: 1920px) and (min-height: 2560px) {
+    :root {
+        --device-width: 1920px;
+        --device-height: 2560px;
+    }
+}

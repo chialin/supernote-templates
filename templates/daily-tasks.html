@@ -4,12 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Tasks</title>
+    <link rel="stylesheet" href="../styles/devices.css">
     <style>
-        :root {
-            --font-size-lg: 44px;
-            --font-size-md: 24px;
-            --font-size-sm: 10px;
-        }
 
         * {
             margin: 0;
@@ -22,15 +18,15 @@
             background-color: white;
             padding: 0;
             margin: 0;
-            width: 1404px;
-            height: 1872px;
+            width: var(--device-width);
+            height: var(--device-height);
         }
 
         .container {
             width: 100%;
             height: 100%;
             background-color: white;
-            padding: 15px 15px 150px 150px;
+            padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);
             display: flex;
             flex-direction: column;
         }

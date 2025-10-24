@@ -1,10 +1,12 @@
 {
-  "name": "html-to-png-converter",
+  "name": "supernote-templates",
   "version": "1.0.0",
-  "description": "Convert HTML to PNG using Puppeteer",
-  "main": "convert-to-png.js",
+  "description": "Multi-device Supernote template generator using HTML and Puppeteer",
+  "main": "scripts/convert-to-png.js",
   "scripts": {
-    "convert": "node convert-to-png.js"
+    "generate": "node scripts/generate-all.js",
+    "generate:nomad": "node scripts/convert-to-png.js templates/daily-tasks.html nomad",
+    "generate:manta": "node scripts/convert-to-png.js templates/daily-tasks.html manta"
   },
   "dependencies": {
     "puppeteer": "^24.26.1"

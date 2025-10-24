@@ -27,17 +27,17 @@
 
 ## 任務
 
-- [ ] 1. 建立目錄結構和共用樣式系統
+- [x] 1. 建立目錄結構和共用樣式系統
   - 1.1 建立 `styles/` 目錄
   - 1.2 建立 `templates/` 目錄
   - 1.3 建立 `scripts/` 目錄
   - 1.4 建立 `dist/nomad/` 和 `dist/manta/` 目錄
   - 1.5 建立 `styles/devices.css`，定義 Nomad 和 Manta 的 CSS 變數
-  - 1.6 定義共用 CSS 變數（不在 Media Query 內）：字體大小（--font-size-lg: 44px、--font-size-md: 24px、--font-size-sm: 10px）、安全區域（--safe-area-top: 15px、--safe-area-right: 15px、--safe-area-bottom: 150px、--safe-area-left: 150px）
+  - 1.6 定義共用 CSS 變數（不在 Media Query 內）:字體大小（--font-size-lg: 44px、--font-size-md: 24px、--font-size-sm: 10px）、安全區域（--safe-area-top: 15px、--safe-area-right: 15px、--safe-area-bottom: 150px、--safe-area-left: 150px）
   - 1.7 Nomad 預設樣式：寬度 --device-width: 1404px、高度 --device-height: 1872px
   - 1.8 Manta Media Query 樣式：只定義寬度 --device-width: 1920px、高度 --device-height: 2560px（字體和安全區域使用共用變數，不需重複定義）
 
-- [ ] 2. 重構現有模板使用共用樣式
+- [x] 2. 重構現有模板使用共用樣式
   - 2.1 將 `daily-tasks.html` 移動到 `templates/` 目錄
   - 2.2 在 `templates/daily-tasks.html` 中引入 `../styles/devices.css`
   - 2.3 將硬編碼的 body 尺寸改為使用 `var(--device-width)` 和 `var(--device-height)`
@@ -45,7 +45,7 @@
   - 2.5 將硬編碼的 padding 改為使用 `var(--safe-area-top)`、`var(--safe-area-right)`、`var(--safe-area-bottom)`、`var(--safe-area-left)`
   - 2.6 在瀏覽器中測試：調整視窗到 1404×1872（Nomad）和 1920×2560（Manta）確認樣式正確切換
 
-- [ ] 3. 重構轉換腳本支援多裝置
+- [x] 3. 重構轉換腳本支援多裝置
   - 3.1 將 `convert-to-png.js` 移動到 `scripts/` 目錄
   - 3.2 定義 deviceConfigs 物件，包含 nomad 和 manta 的寬高配置
   - 3.3 修改 convertHtmlToPng 函數接受兩個參數：htmlPath 和 deviceId
@@ -54,7 +54,7 @@
   - 3.6 輸出路徑改為 `dist/${deviceId}/${模板名稱}.png`
   - 3.7 測試：執行 `node scripts/convert-to-png.js templates/daily-tasks.html nomad` 和 `manta` 確認兩個版本都能正確生成
 
-- [ ] 4. 建立批次生成腳本和工作流程
+- [x] 4. 建立批次生成腳本和工作流程
   - 4.1 建立 `scripts/generate-all.js`
   - 4.2 使用 Node.js fs 模組讀取 `templates/` 目錄下所有 `.html` 檔案
   - 4.3 使用 `fs.readdirSync()` 或 `glob` 自動掃描 templates 目錄，過濾出所有 .html 檔案
@@ -68,7 +68,7 @@
   - 4.8 更新 `.gitignore` 忽略 `dist/` 目錄
   - 4.9 測試：執行 `npm run generate` 確認所有 templates/ 下的 HTML 都正確生成兩個裝置版本
 
-- [ ] 5. 撰寫專案文件
+- [x] 5. 撰寫專案文件
   - 5.1 更新 README.md 說明專案結構
   - 5.2 說明如何開發新模板：在 templates/ 目錄新增 HTML 檔案 → 引入 devices.css → 使用 CSS 變數 → 執行 generate 自動生成
   - 5.3 說明如何調整裝置參數：修改 styles/devices.css 中的變數值
