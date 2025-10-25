@@ -19,7 +19,7 @@ Example from `styles/devices.css`:
 ```css
 :root {
     --font-size-lg: 44px;  /* Same physical size on both devices */
-    --safe-area-bottom: 150px;  /* Toolbar safe zone */
+    --safe-area-bottom: 150px;  /* Toolbar safe zone - adjust as needed */
     --device-width: 1404px;  /* Nomad default */
 }
 
@@ -30,6 +30,8 @@ Example from `styles/devices.css`:
     }
 }
 ```
+
+**Note**: Font sizes and safe area values are examples and may be adjusted in the actual file.
 
 ### Generation Pipeline
 1. HTML templates in `templates/` reference `../styles/devices.css`
@@ -73,9 +75,10 @@ Media query should trigger and dimensions should adapt automatically.
 
 ## Critical Design Constraints
 
-### Safe Areas (from research docs)
-- Top/Right/Left: 15px minimum (device bezel)
-- Bottom/Left: 150px minimum (toolbar overlay)
+### Safe Areas
+- Top/Right: Account for device bezel
+- Bottom/Left: Account for toolbar overlay
+- Current values defined in `styles/devices.css`
 - Apply via: `padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);`
 
 ### File Specifications
@@ -85,7 +88,7 @@ Media query should trigger and dimensions should adapt automatically.
 - File naming: No spaces or special characters
 
 ### Font Sizing Philosophy
-Since both devices share 300 DPI, `--font-size-lg: 44px` renders at identical physical size on both screens. Avoid device-specific font overrides unless intentional for design reasons.
+Since both devices share 300 DPI, font sizes defined in `styles/devices.css` render at identical physical size on both screens. Avoid device-specific font overrides unless intentional for design reasons.
 
 ## Project-Specific Patterns
 

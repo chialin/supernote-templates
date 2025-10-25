@@ -98,13 +98,15 @@ node scripts/convert-to-png.js templates/daily-tasks.html manta
 - `--device-height`: Canvas height
 
 **Shared variables** (same across all devices due to identical DPI):
-- `--font-size-lg`: 44px (large text)
-- `--font-size-md`: 24px (medium text)
-- `--font-size-sm`: 10px (small text)
-- `--safe-area-top`: 15px
-- `--safe-area-right`: 15px
-- `--safe-area-bottom`: 150px (toolbar safe area)
-- `--safe-area-left`: 150px (toolbar safe area)
+- `--font-size-lg`: Large text
+- `--font-size-md`: Medium text
+- `--font-size-sm`: Small text
+- `--safe-area-top`: Top margin
+- `--safe-area-right`: Right margin
+- `--safe-area-bottom`: Bottom margin (for toolbar safe area)
+- `--safe-area-left`: Left margin (for toolbar safe area)
+
+See [styles/devices.css](styles/devices.css) for current values.
 
 ## Adjusting Device Parameters
 
@@ -115,7 +117,7 @@ Edit [styles/devices.css](styles/devices.css) to modify device-specific settings
 :root {
     --font-size-lg: 44px;    /* Adjust font sizes */
     --safe-area-bottom: 150px; /* Adjust safe areas */
-    /* ... */
+    /* See styles/devices.css for all available variables */
 }
 
 /* Nomad default dimensions */
@@ -164,13 +166,13 @@ After modifying `devices.css`, regenerate all templates with `npm run generate`.
 - Screen size: 7.8 inches
 - Resolution: 1404 × 1872 pixels
 - DPI: 300
-- Safe area: 150px left/bottom (based on toolbar position)
 
 ### Manta (A5 X2)
 - Screen size: 10.7 inches
 - Resolution: 1920 × 2560 pixels
 - DPI: 300
-- Safe area: 150px left/bottom (same physical size due to identical DPI)
+
+**Note**: Safe area margins are defined in [styles/devices.css](styles/devices.css) to accommodate the toolbar position.
 
 ## Notes
 

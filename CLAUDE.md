@@ -37,9 +37,10 @@ node scripts/convert-to-png.js templates/file.html nomad
 The project uses a **CSS variable + media query** approach for multi-device support:
 
 1. **Shared variables** (in `:root`, outside media queries) - identical across devices:
-   - Font sizes: `--font-size-lg` (44px), `--font-size-md` (24px), `--font-size-sm` (10px)
-   - Safe areas: `--safe-area-top/right/bottom/left` (15px/15px/150px/150px)
+   - Font sizes: `--font-size-lg`, `--font-size-md`, `--font-size-sm`
+   - Safe areas: `--safe-area-top`, `--safe-area-right`, `--safe-area-bottom`, `--safe-area-left`
    - Same physical size on both devices due to identical 300 DPI
+   - See [styles/devices.css](styles/devices.css) for current values
 
 2. **Device-specific variables** (in media queries) - only dimensions differ:
    - `--device-width` and `--device-height`
@@ -62,9 +63,10 @@ The project uses a **CSS variable + media query** approach for multi-device supp
 ### Critical Design Constraints
 
 **Safe areas** (for Supernote toolbar overlay):
-- Bottom: 150px (toolbar in bottom-left corner)
-- Left: 150px (toolbar in bottom-left corner)
-- Top/Right: 15px (device bezel)
+- Bottom/Left: Account for toolbar in bottom-left corner
+- Top/Right: Account for device bezel
+
+Current values are defined in [styles/devices.css](styles/devices.css).
 
 Always apply to container:
 ```css
