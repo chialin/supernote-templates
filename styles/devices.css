@@ -5,8 +5,8 @@
     --font-size-lg: 44px;
     --font-size-md: 24px;
     --font-size-sm: 10px;
-    --safe-area-top: 15px;
-    --safe-area-right: 15px;
+    --safe-area-top: 30px;
+    --safe-area-right: 30px;
     --safe-area-bottom: 150px;
     --safe-area-left: 150px;
 }
