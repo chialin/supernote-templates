@@ -1,5 +1,10 @@
 # Supernote Templates Development Guide
 
+## Language Preferences
+- **Communication**: Always respond in Traditional Chinese (繁體中文) when talking to the user
+- **Template Content**: All content inside templates (HTML, labels, titles) must be in English
+- **Code & Comments**: Code and technical comments can be in English
+
 ## Project Overview
 HTML/CSS-based template generator for Supernote e-ink devices (Nomad A6 X2 and Manta A5 X2). Templates are designed once using CSS variables and automatically generated for both devices via Puppeteer.
 

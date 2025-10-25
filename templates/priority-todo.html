@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Todo</title>
+    <link rel="stylesheet" href="../styles/devices.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            padding: 0;
+            margin: 0;
+            width: var(--device-width);
+            height: var(--device-height);
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #000;
+            margin-bottom: 15px;
+        }
+
+        .days-selector {
+            display: flex;
+            border: 2px solid #000;
+        }
+
+        .day {
+            padding: 8px 12px;
+            border-right: 1px solid #000;
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            text-align: center;
+            min-width: 40px;
+        }
+
+        .day:last-child {
+            border-right: none;
+        }
+
+        .date-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+        }
+
+        .date-label {
+            font-size: var(--font-size-lg);
+        }
+
+        .date-input {
+            border: none;
+            border-bottom: 2px solid #000;
+            width: 200px;
+            padding: 2px 4px;
+            font-size: var(--font-size-lg);
+        }
+
+        .todos {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #000;
+            flex-shrink: 0;
+        }
+
+        .todo-item.primary {
+            height: 140px;
+        }
+
+        .todo-item.secondary {
+            height: 70px;
+        }
+
+        .checkbox {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #000;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .todo-item.secondary .checkbox {
+            width: 25px;
+            height: 25px;
+        }
+
+        .section-header {
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            padding: 8px 10px;
+            border-bottom: 1px solid #000;
+            letter-spacing: 1px;
+            margin-top: 30px;
+        }
+
+        .section-header:first-child {
+            margin-top: 0;
+        }
+
+        .todo-line {
+            flex: 1;
+            border: none;
+            border-bottom: 1px solid transparent;
+            font-size: var(--font-size-md);
+            padding: 5px 0;
+        }
+
+        .todo-item.secondary .todo-line {
+            font-size: var(--font-size-sm);
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="days-selector">
+                <div class="day">Mo</div>
+                <div class="day">Tu</div>
+                <div class="day">We</div>
+                <div class="day">Th</div>
+                <div class="day">Fr</div>
+                <div class="day">Sa</div>
+                <div class="day">Su</div>
+            </div>
+            <div class="date-section">
+                <span class="date-label">Date</span>
+                <input type="text" class="date-input">
+            </div>
+        </div>
+
+        <div class="todos">
+            <!-- Primary Tasks (3 large items) -->
+            <div class="section-header">PRIORITY TASKS</div>
+            <div class="todo-item primary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item primary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item primary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+
+            <!-- Secondary Tasks (16 smaller items to fill the page) -->
+            <div class="section-header">OTHER TASKS</div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
