@@ -1,189 +1,59 @@
 # Supernote Templates
 
-Multi-device Supernote template generator that supports both Nomad (A6 X2) and Manta (A5 X2) devices. Templates are designed using HTML/CSS and converted to PNG format using Puppeteer.
+Ready-to-use note templates for Supernote e-ink devices. Download PNG files and import them directly to your Nomad (A6 X2) or Manta (A5 X2) device.
 
-## Features
+## Available Templates
 
-- **Multi-device support**: Automatically generates templates for Nomad (1404×1872) and Manta (1920×2560)
-- **Shared style system**: CSS Media Query-based approach for consistent styling across devices
-- **Automatic scanning**: Batch generation automatically detects all templates in the `templates/` directory
-- **Easy to extend**: Add new devices or templates with minimal configuration
+Browse and download templates:
+- [**Nomad (A6 X2) Templates**](dist/nomad/) - 1404×1872 px
+- [**Manta (A5 X2) Templates**](dist/manta/) - 1920×2560 px
 
-## Project Structure
+## How to Use
 
-```
-supernote-templates/
-├── styles/
-│   └── devices.css          # Shared device-specific styles (CSS variables + Media Queries)
-├── templates/
-│   └── daily-tasks.html     # Template files (use CSS variables from devices.css)
-├── scripts/
-│   ├── convert-to-png.js    # Single template conversion script
-│   └── generate-all.js      # Batch generation script (auto-scans templates/)
-├── dist/
-│   ├── nomad/               # Generated PNG files for Nomad device
-│   └── manta/               # Generated PNG files for Manta device
-├── package.json
-└── README.md
-```
+### 1. Download Templates
 
-## Installation
+1. Choose your device folder above (Nomad or Manta)
+2. Browse available templates
+3. Download the PNG files you want to use
 
-1. Ensure Node.js is installed (v14 or higher)
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+### 2. Import to Supernote
 
-## Usage
+1. Connect your Supernote to your computer
+2. Open Supernote storage
+3. Copy the downloaded PNG files to the `MyStyles/` folder
+4. Disconnect your device
+5. On your Supernote, select the new template to start using it
 
-### Generate all templates for all devices
+That's it! No installation or technical setup required.
 
-```bash
-npm run generate
-```
+## Supported Devices
 
-This command automatically:
-- Scans all `.html` files in the `templates/` directory
-- Generates PNG files for both Nomad and Manta devices
-- Outputs files to `dist/nomad/` and `dist/manta/` directories
+| Device | Screen Size | Resolution | DPI |
+|--------|-------------|------------|-----|
+| **Nomad (A6 X2)** | 7.8 inches | 1404 × 1872 px | 300 |
+| **Manta (A5 X2)** | 10.7 inches | 1920 × 2560 px | 300 |
 
-### Generate single template for specific device
+## Template Preview
 
-For Nomad:
-```bash
-npm run generate:nomad
-```
+Current available templates:
+- `daily-routine.png` - Monthly habit tracker with task grid and notes section
+- `priority-todo.png` - Priority-based todo list with section headers
 
-For Manta:
-```bash
-npm run generate:manta
-```
+More templates coming soon!
 
-Or use the script directly:
-```bash
-node scripts/convert-to-png.js templates/daily-tasks.html nomad
-node scripts/convert-to-png.js templates/daily-tasks.html manta
-```
+## About This Project
 
-## Developing New Templates
+These templates are generated from HTML/CSS files, making them:
+- **Easy to version control** - All changes are tracked in Git
+- **Automatically generated** - One design works for multiple device sizes
+- **Open source** - Anyone can contribute new templates
 
-1. **Create HTML file**: Add a new `.html` file in the `templates/` directory
-2. **Import shared styles**: Include the device styles in your HTML:
-   ```html
-   <link rel="stylesheet" href="../styles/devices.css">
-   ```
-3. **Use CSS variables**: Apply device-responsive variables in your styles:
-   ```css
-   body {
-       width: var(--device-width);
-       height: var(--device-height);
-   }
+Want to learn how it works or contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md).
 
-   .container {
-       padding: var(--safe-area-top) var(--safe-area-right)
-                var(--safe-area-bottom) var(--safe-area-left);
-   }
+## License
 
-   h1 {
-       font-size: var(--font-size-lg);
-   }
-   ```
-4. **Generate**: Run `npm run generate` to automatically create PNG files for all devices
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Available CSS Variables
+---
 
-**Device dimensions** (automatically adjusted per device):
-- `--device-width`: Canvas width
-- `--device-height`: Canvas height
-
-**Shared variables** (same across all devices due to identical DPI):
-- `--font-size-lg`: Large text
-- `--font-size-md`: Medium text
-- `--font-size-sm`: Small text
-- `--safe-area-top`: Top margin
-- `--safe-area-right`: Right margin
-- `--safe-area-bottom`: Bottom margin (for toolbar safe area)
-- `--safe-area-left`: Left margin (for toolbar safe area)
-
-See [styles/devices.css](styles/devices.css) for current values.
-
-## Adjusting Device Parameters
-
-Edit [styles/devices.css](styles/devices.css) to modify device-specific settings:
-
-```css
-/* Shared styles for all devices */
-:root {
-    --font-size-lg: 44px;    /* Adjust font sizes */
-    --safe-area-bottom: 150px; /* Adjust safe areas */
-    /* See styles/devices.css for all available variables */
-}
-
-/* Nomad default dimensions */
-:root {
-    --device-width: 1404px;
-    --device-height: 1872px;
-}
-
-/* Manta dimensions */
-@media (min-width: 1920px) and (min-height: 2560px) {
-    :root {
-        --device-width: 1920px;
-        --device-height: 2560px;
-    }
-}
-```
-
-After modifying `devices.css`, regenerate all templates with `npm run generate`.
-
-## Adding New Devices
-
-1. **Add CSS Media Query** in [styles/devices.css](styles/devices.css):
-   ```css
-   @media (min-width: 2048px) and (min-height: 2732px) {
-       :root {
-           --device-width: 2048px;
-           --device-height: 2732px;
-       }
-   }
-   ```
-
-2. **Add device config** in [scripts/convert-to-png.js](scripts/convert-to-png.js):
-   ```javascript
-   const deviceConfigs = {
-       nomad: { width: 1404, height: 1872 },
-       manta: { width: 1920, height: 2560 },
-       newDevice: { width: 2048, height: 2732 }  // Add this
-   };
-   ```
-
-3. **Regenerate**: Run `npm run generate` to create templates for all devices including the new one
-
-## Device Specifications
-
-### Nomad (A6 X2)
-- Screen size: 7.8 inches
-- Resolution: 1404 × 1872 pixels
-- DPI: 300
-
-### Manta (A5 X2)
-- Screen size: 10.7 inches
-- Resolution: 1920 × 2560 pixels
-- DPI: 300
-
-**Note**: Safe area margins are defined in [styles/devices.css](styles/devices.css) to accommodate the toolbar position.
-
-## Notes
-
-- **DPI Consistency**: Both devices have 300 DPI, so font sizes and safe areas remain the same in pixels to maintain identical physical dimensions
-- **Auto-scanning**: The `generate-all.js` script automatically discovers all `.html` files in `templates/`, no need to manually maintain a template list
-- **Browser preview**: Open any template HTML in a browser and resize the window to 1404×1872 (Nomad) or 1920×2560 (Manta) to preview device-specific layouts
-
-## Output Files
-
-Generated PNG files are organized by device:
-- `dist/nomad/daily-tasks.png` (1404×1872 px)
-- `dist/manta/daily-tasks.png` (1920×2560 px)
-
-The `dist/` directory is ignored by git (see [.gitignore](.gitignore)).
+**For Developers**: Want to create or modify templates? See [CONTRIBUTING.md](CONTRIBUTING.md) for the full development guide.
