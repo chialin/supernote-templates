@@ -151,6 +151,18 @@
             text-align: center;
         }
 
+        /* Reference header rows (inserted after row 15 and 31) */
+        .tracker-grid tr.reference-header {
+            flex: 0 0 auto;  /* Fixed height, don't stretch with flex */
+            background-color: #f5f5f5;  /* Light gray background */
+        }
+
+        .tracker-grid tr.reference-header td {
+            font-weight: 600;  /* Semi-bold, lighter than thead's bold */
+            color: #666;  /* Gray text for distinction */
+            padding: 4px;
+        }
+
         /* Right Section */
         .right-section {
             display: flex;
@@ -369,6 +381,11 @@
                             <td class="row-label">15</td>
                             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                         </tr>
+                        <!-- Reference Header #1 (after row 15) -->
+                        <tr class="reference-header">
+                            <td></td>
+                            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td>
+                        </tr>
                         <tr>
                             <td class="row-label">16</td>
                             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -432,6 +449,11 @@
                         <tr>
                             <td class="row-label">31</td>
                             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                        </tr>
+                        <!-- Reference Header #2 (after row 31) -->
+                        <tr class="reference-header">
+                            <td></td>
+                            <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td>
                         </tr>
                     </tbody>
                 </table>
