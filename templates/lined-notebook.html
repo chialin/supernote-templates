@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lined Notebook</title>
+    <link rel="stylesheet" href="../styles/devices.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            padding: 0;
+            margin: 0;
+            width: var(--device-width);
+            height: var(--device-height);
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* Line style - using 1px by default, can be changed to 2px for e-ink testing */
+        .line {
+            height: 94px;
+            border-bottom: 1px solid #000;
+            flex-shrink: 0;
+        }
+
+        /* Alternative 2px version for e-ink testing:
+        .line {
+            height: 94px;
+            border-bottom: 2px solid #000;
+            flex-shrink: 0;
+        }
+        */
+    </style>
+</head>
+<body>
+    <div class="container" id="lines-container">
+        <!-- Template line that will be cloned to fill the page -->
+        <div class="line" id="line-template"></div>
+    </div>
+
+    <!-- Auto-fill Rows Helper -->
+    <script src="../scripts/auto-fill-rows.js"></script>
+    <script>
+        // Auto-fill lines to fill remaining space
+        setupAutoFillRows({
+            containerId: 'lines-container',
+            templateId: 'line-template',
+            rowHeight: 94,
+            debug: true
+        });
+    </script>
+</body>
+</html>
