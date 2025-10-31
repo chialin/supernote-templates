@@ -269,7 +269,7 @@ See [styles/devices.css](styles/devices.css) for current values.
 - ❌ Hardcode pixel dimensions in template HTML
 - ❌ Forget safe areas (toolbar overlays bottom-left corner)
 - ❌ Override font sizes in media queries (DPI is same for both devices)
-- ❌ Use complex JavaScript (won't work in generated PNG)
+- ❌ Use JavaScript without setting `data-render-complete` flag (see Dynamic Row Generation section)
 
 ---
 
@@ -303,6 +303,57 @@ npm run generate
 2. Modify the HTML structure or CSS styles
 3. Preview changes in browser
 4. Regenerate: `npm run generate`
+
+### Dynamic Row Generation (Auto-fill Rows)
+
+For templates that need to fill remaining vertical space with repeated rows (e.g., task lists), use the `auto-fill-rows.js` helper:
+
+**Basic Usage:**
+
+```html
+<!-- 1. Create container with ID and a template row -->
+<div class="container" id="tasks-container">
+    <h2>Tasks</h2>
+    <div class="task-item" id="task-template">
+        <input type="checkbox">
+        <span>Task description</span>
+    </div>
+</div>
+
+<!-- 2. Include script and configure -->
+<script src="../scripts/auto-fill-rows.js"></script>
+<script>
+    setupAutoFillRows({
+        containerId: 'tasks-container',  // Container ID
+        templateId: 'task-template',     // Template row ID
+        rowHeight: 70                    // Row height in pixels
+    });
+</script>
+```
+
+**Advanced Options:**
+
+```javascript
+setupAutoFillRows({
+    containerId: 'container-id',
+    templateId: 'template-id',
+    rowHeight: 70,
+    minRows: 5,        // Minimum number of rows (default: 1)
+    maxRows: 20,       // Maximum number of rows (default: Infinity)
+    debug: true        // Enable debug logging (default: false)
+});
+```
+
+**How it works:**
+- Automatically calculates available vertical space
+- Dynamically generates rows to fill the container
+- Works across all device sizes without manual configuration
+- Compatible with Puppeteer screenshot generation
+
+**Important notes:**
+- Container must have a defined height (via CSS or Flexbox)
+- `rowHeight` should match your actual CSS row height
+- Template row's ID will be removed from cloned rows
 
 ---
 

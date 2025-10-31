@@ -55,6 +55,18 @@ async function convertHtmlToPng(htmlPath, deviceId) {
         const fileUrl = `file://${resolvedHtmlPath}`;
         await page.goto(fileUrl, { waitUntil: 'networkidle0' });
 
+        // Wait for dynamic JavaScript rendering to complete (if page uses it)
+        // Check if page has a render-complete flag
+        try {
+            await page.waitForFunction(() => {
+                return document.body.getAttribute('data-render-complete') === 'true';
+            }, { timeout: 5000 });
+            console.log('  Dynamic rendering completed');
+        } catch (error) {
+            // If timeout, page doesn't use dynamic rendering - that's fine
+            console.log('  No dynamic rendering detected (or timeout)');
+        }
+
         // Take screenshot with device-specific dimensions
         await page.screenshot({
             path: outputPath,
