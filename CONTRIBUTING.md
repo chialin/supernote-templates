@@ -144,6 +144,23 @@ Current values are defined in [styles/devices.css](styles/devices.css). Always a
 
 ## Creating New Templates
 
+### Recommended Starting Point
+
+**For beginners**, we recommend starting by studying `templates/lined-notebook.html` - it's the simplest template and demonstrates the auto-fill rows feature perfectly.
+
+**Why lined-notebook.html is a great reference:**
+- ✅ Minimal structure - easy to understand
+- ✅ Shows proper two-layer container pattern (outer for safe areas, inner for content)
+- ✅ Demonstrates `auto-fill-rows.js` integration for dynamic content generation
+- ✅ Correct use of CSS variables and safe areas
+- ✅ Works perfectly across both devices
+
+**Quick start:**
+1. Copy `templates/lined-notebook.html` as your starting template
+2. Modify the `.line` style to match your needs (e.g., checkboxes, grid cells)
+3. Adjust `rowHeight` parameter to match your new row design
+4. Test and generate!
+
 ### Step-by-Step Guide
 
 #### 1. Create HTML File
@@ -306,27 +323,63 @@ npm run generate
 
 ### Dynamic Row Generation (Auto-fill Rows)
 
-For templates that need to fill remaining vertical space with repeated rows (e.g., task lists), use the `auto-fill-rows.js` helper:
+For templates that need to fill remaining vertical space with repeated rows (e.g., task lists, lined notebooks), use the `auto-fill-rows.js` helper.
+
+**Real-world example:** See `templates/lined-notebook.html` for a complete working implementation.
+
+**Important: Two-layer container structure**
+
+To ensure proper height calculation with safe areas, always use this pattern:
+
+```html
+<body>
+    <!-- Outer container: handles safe areas -->
+    <div class="container">
+        <!-- Inner container: auto-fill target -->
+        <div id="lines-container">
+            <div class="line" id="line-template"></div>
+        </div>
+    </div>
+</body>
+```
+
+```css
+/* Outer container with safe areas */
+.container {
+    width: 100%;
+    height: 100%;
+    padding: var(--safe-area-top) var(--safe-area-right)
+             var(--safe-area-bottom) var(--safe-area-left);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Inner container for auto-fill */
+#lines-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;  /* Clip any overflow beyond safe area */
+}
+```
+
+**Why this structure?**
+- Outer container applies padding for safe areas
+- Inner container's `clientHeight` returns the **actual fillable height** (already excluding padding)
+- This ensures auto-fill calculates the correct number of rows
 
 **Basic Usage:**
 
 ```html
-<!-- 1. Create container with ID and a template row -->
-<div class="container" id="tasks-container">
-    <h2>Tasks</h2>
-    <div class="task-item" id="task-template">
-        <input type="checkbox">
-        <span>Task description</span>
-    </div>
-</div>
-
-<!-- 2. Include script and configure -->
+<!-- Include script and configure -->
 <script src="../scripts/auto-fill-rows.js"></script>
 <script>
     setupAutoFillRows({
-        containerId: 'tasks-container',  // Container ID
-        templateId: 'task-template',     // Template row ID
-        rowHeight: 70                    // Row height in pixels
+        containerId: 'lines-container',  // Inner container ID
+        templateId: 'line-template',     // Template row ID
+        rowHeight: 94                    // Row height in pixels
     });
 </script>
 ```

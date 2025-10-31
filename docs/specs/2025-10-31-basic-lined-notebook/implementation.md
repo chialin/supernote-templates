@@ -51,7 +51,7 @@
   - 4.4 建立初始化腳本，呼叫 `setupAutoFillRows({ containerId: 'lines-container', templateId: 'line-template', rowHeight: 94, debug: true })`
   - 4.5 確保腳本在 DOM 載入完成後執行
 
-- [ ] 5. 測試多裝置生成
+- [x] 5. 測試多裝置生成
   - 5.1 執行 `npm run generate:nomad` 測試 Nomad 裝置生成
   - 5.2 執行 `npm run generate:manta` 測試 Manta 裝置生成
   - 5.3 檢查生成的 PNG 檔案是否在 `dist/nomad/` 和 `dist/manta/` 目錄下

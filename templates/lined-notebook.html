@@ -28,8 +28,15 @@
             padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        #lines-container {
+            display: flex;
+            flex-direction: column;
             flex: 1;
             min-height: 0;
+            overflow: hidden;
         }
 
         /* Line style - using 1px by default, can be changed to 2px for e-ink testing */
@@ -38,20 +45,14 @@
             border-bottom: 1px solid #000;
             flex-shrink: 0;
         }
-
-        /* Alternative 2px version for e-ink testing:
-        .line {
-            height: 94px;
-            border-bottom: 2px solid #000;
-            flex-shrink: 0;
-        }
-        */
     </style>
 </head>
 <body>
-    <div class="container" id="lines-container">
-        <!-- Template line that will be cloned to fill the page -->
-        <div class="line" id="line-template"></div>
+    <div class="container">
+        <div id="lines-container">
+            <!-- Template line that will be cloned to fill the page -->
+            <div class="line" id="line-template"></div>
+        </div>
     </div>
 
     <!-- Auto-fill Rows Helper -->
