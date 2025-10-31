@@ -139,6 +139,25 @@
             font-size: var(--font-size-sm);
         }
 
+        /* Control number of visible Other Tasks rows per device */
+        /* Default (Nomad): Show only first 16 Other Tasks rows */
+        /* In .todos container: 1 header + 3 primary + 1 header + 16 secondary = 21 children */
+        /* So hide from 22nd child onwards (17th Other Tasks row) */
+        .todos > :nth-child(n+22) {
+            display: none;
+        }
+
+        /* Manta: Show first 25 Other Tasks rows */
+        /* Show up to 30th child (1 + 3 + 1 + 25 = 30) */
+        @media (min-width: 1920px) and (min-height: 2560px) {
+            .todos > :nth-child(n+22) {
+                display: flex;  /* Re-enable rows 17+ */
+            }
+            .todos > :nth-child(n+31) {
+                display: none;  /* Hide from 31st child onwards (26th Other Tasks row) */
+            }
+        }
+
         @media print {
             body {
                 background-color: white;
@@ -191,6 +210,62 @@
 
             <!-- Secondary Tasks (16 smaller items to fill the page) -->
             <div class="section-header">OTHER TASKS</div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
+            <div class="todo-item secondary">
+                <div class="checkbox"></div>
+                <div class="todo-line"></div>
+            </div>
             <div class="todo-item secondary">
                 <div class="checkbox"></div>
                 <div class="todo-line"></div>
