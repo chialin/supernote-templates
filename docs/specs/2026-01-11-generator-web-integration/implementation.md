@@ -8,6 +8,7 @@
 ## 任務概要
 
 - [x] 安裝並設定 shadcn/ui
+- [x] 移除 src 目錄層級
 - [ ] 為現有模板加入 meta 標籤
 - [ ] 修改 generator 建構流程以產生 templates.json
 - [ ] 建立 web 與 generator 的整合機制
@@ -43,6 +44,31 @@
 
 **實作備註**
 照預期開發。shadcn/ui 已初始化（style: new-york, base color: gray, CSS variables: yes），並安裝 button、card、dropdown-menu 元件。建構驗證通過。
+
+---
+
+### 移除 src 目錄層級
+
+**實作要點**
+- 將 `packages/web/src/` 下的所有內容（components、lib、i18n）移動到 `packages/web/` 根目錄
+- 更新 `tsconfig.json` 的 paths 設定，將 `@/*` 從 `./src/*` 改為 `./*`
+- 更新 `components.json` 的 aliases 設定，確保 shadcn 新增元件時放到正確位置
+- 更新所有 import 路徑（如有需要）
+- 驗證建構成功且所有功能正常
+
+**相關檔案**
+- `packages/web/tsconfig.json` - 更新 paths 設定
+- `packages/web/components.json` - 更新 aliases 設定
+- `packages/web/src/*` - 移動到 `packages/web/`
+- 所有使用 `@/` import 的檔案
+
+**完成檢查**
+- 執行 `npm run build` 確認建構成功
+- 執行 `npx shadcn@latest add badge` 測試元件是否安裝到正確位置（`packages/web/components/ui/badge.tsx`）
+- 測試後移除 badge 元件
+
+**實作備註**
+[技術障礙] `next.config.ts` 和 `i18n/request.ts` 中有寫死的 `src/` 路徑，需要一併更新。修正後建構成功，shadcn 元件也能正確安裝到新位置。
 
 ---
 
