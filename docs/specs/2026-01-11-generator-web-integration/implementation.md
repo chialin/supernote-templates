@@ -16,7 +16,7 @@
 - [x] 實作模板詳情頁與下載功能
 - [x] 使用 shadcn 重構 LanguageSwitcher
 - [x] 執行驗收測試
-- [ ] 更新專案文件
+- [x] 更新專案文件
 
 ## 任務細節
 
@@ -266,7 +266,7 @@
 - `.github/copilot-instructions.md` - Copilot 指引文件
 
 **實作備註**
-<!-- 執行過程中填寫 -->
+[方向調整] 依使用者指示刪除 `.github/copilot-instructions.md` 而非更新，因該檔案已不再使用。更新 README.md（新增網站連結、模板清單、建立指引）和 CLAUDE.md（新增 meta 標籤說明、Web Integration 章節、shadcn/ui 說明、更新檔案結構）。
 
 ---
 

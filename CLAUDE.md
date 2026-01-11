@@ -68,6 +68,16 @@ The project uses a **CSS variable + media query** approach for multi-device supp
    - `packages/generator/scripts/convert-to-png.js` launches Puppeteer with device viewport
    - Media query activates → correct CSS variables applied
    - Screenshot saved to `packages/generator/dist/{deviceId}/{template-name}.png`
+4. After all PNGs are generated, `generate-all.js` extracts metadata from HTML files and outputs `dist/templates.json`
+
+### Web Integration
+
+The web package integrates with generator output via npm workspace dependency:
+
+1. `packages/web/package.json` declares `@supernote-templates/generator` as a devDependency
+2. `packages/web/scripts/copy-templates.js` runs as a prebuild script
+3. The script copies `generator/dist/*` to `web/public/templates/`
+4. Web pages read `templates.json` to display template listings
 
 ### Critical Design Constraints
 
@@ -95,7 +105,17 @@ padding: var(--safe-area-top) var(--safe-area-right)
    ```html
    <link rel="stylesheet" href="../styles/devices.css">
    ```
-3. Use CSS variables for responsive design:
+3. **Add required template metadata** (all 6 meta tags are required):
+   ```html
+   <!-- Template Metadata -->
+   <meta name="template:name:en" content="Template Name">
+   <meta name="template:name:zh-TW" content="模板名稱">
+   <meta name="template:name:ja" content="テンプレート名">
+   <meta name="template:description:en" content="Description of the template...">
+   <meta name="template:description:zh-TW" content="模板描述...">
+   <meta name="template:description:ja" content="テンプレートの説明...">
+   ```
+4. Use CSS variables for responsive design:
    ```css
    body {
        width: var(--device-width);
@@ -109,9 +129,11 @@ padding: var(--safe-area-top) var(--safe-area-right)
        font-size: var(--font-size-lg);
    }
    ```
-4. Run `npm run build` from root - automatically detects new templates
+5. Run `npm run build` from root - automatically detects new templates
 
 **No manual registration needed** - `generate-all.js` uses `fs.readdirSync()` to discover templates.
+
+**Build will fail** if any required meta tags are missing - this ensures all templates have complete i18n support.
 
 ## Common Patterns
 
@@ -173,17 +195,25 @@ packages/
 │   ├── styles/devices.css        Shared CSS variables + device media queries
 │   ├── scripts/
 │   │   ├── convert-to-png.js     Single template converter (exports module)
-│   │   └── generate-all.js       Batch generator (auto-discovers templates)
-│   ├── dist/                     Generated PNGs (gitignored)
-│   │   ├── nomad/
-│   │   └── manta/
+│   │   └── generate-all.js       Batch generator + metadata extractor
+│   ├── dist/                     Generated output (gitignored)
+│   │   ├── nomad/                PNG files for Nomad device
+│   │   ├── manta/                PNG files for Manta device
+│   │   └── templates.json        Template metadata for web
 │   └── package.json
 └── web/                          # @supernote-templates/web
-    ├── src/
-    │   ├── app/[locale]/         Localized pages (en, zh-TW, ja)
-    │   ├── components/           React components (LanguageSwitcher, etc.)
-    │   └── i18n/                 next-intl configuration
-    ├── messages/                 Translation JSON files (en.json, zh-TW.json, ja.json)
+    ├── app/[locale]/             Localized pages (en, zh-TW, ja)
+    │   ├── page.tsx              Template list homepage
+    │   └── templates/[id]/       Template detail pages
+    ├── components/               React components
+    │   ├── ui/                   shadcn/ui components
+    │   ├── LanguageSwitcher.tsx  Language dropdown
+    │   └── TemplateCard.tsx      Template card component
+    ├── lib/templates.ts          Template data access layer
+    ├── i18n/                     next-intl configuration
+    ├── messages/                 Translation JSON files
+    ├── scripts/copy-templates.js Prebuild script for generator integration
+    ├── public/templates/         Copied from generator (gitignored)
     ├── out/                      Static export output (gitignored)
     └── package.json
 turbo.json                        Turborepo configuration
@@ -197,12 +227,22 @@ The web package uses **next-intl** for internationalization with static export:
 - **Supported languages**: English (`en`), Traditional Chinese (`zh-TW`), Japanese (`ja`)
 - **URL structure**: All languages use path prefix (`/en`, `/zh-TW`, `/ja`), root `/` redirects to `/en`
 - **Key files**:
-  - `src/i18n/routing.ts` - Language routing configuration
-  - `src/i18n/request.ts` - Request configuration for static rendering
+  - `i18n/routing.ts` - Language routing configuration
+  - `i18n/request.ts` - Request configuration for static rendering
   - `messages/*.json` - Translation files
 
 **Adding translations**: Edit `messages/{locale}.json` files. All locales must have the same key structure.
 
+## Web Package UI Components
+
+The web package uses **shadcn/ui** for UI components:
+
+- **Component location**: `components/ui/` directory
+- **Configuration**: `components.json` in web package root
+- **Adding components**: Run `npx shadcn@latest add <component-name>` from `packages/web/`
+
+Currently installed components: `button`, `card`, `dropdown-menu`
+
 ## Additional Context
 
-See [.github/copilot-instructions.md](.github/copilot-instructions.md) for detailed architecture decisions and [README.md](README.md) for user-facing documentation.
+See [README.md](README.md) for user-facing documentation.
