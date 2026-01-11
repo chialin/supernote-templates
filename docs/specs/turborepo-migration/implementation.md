@@ -7,7 +7,7 @@
 ## 任務概要
 
 - [x] 建立 Turborepo 基礎架構
-- [ ] 遷移 generator 到 packages 目錄
+- [x] 遷移 generator 到 packages 目錄
 - [ ] 建立 Next.js 網站骨架
 - [ ] 配置 Turborepo 任務管道
 - [ ] 執行驗收測試
@@ -58,7 +58,7 @@
 - 確認產生的 PNG 位於 `packages/generator/dist/` 目錄
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發
 
 ---
 
