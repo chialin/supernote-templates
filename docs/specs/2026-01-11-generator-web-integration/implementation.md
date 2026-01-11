@@ -9,7 +9,7 @@
 
 - [x] 安裝並設定 shadcn/ui
 - [x] 移除 src 目錄層級
-- [ ] 為現有模板加入 meta 標籤
+- [x] 為現有模板加入 meta 標籤
 - [ ] 修改 generator 建構流程以產生 templates.json
 - [ ] 建立 web 與 generator 的整合機制
 - [ ] 實作模板列表首頁
@@ -91,7 +91,7 @@
 - 使用文字編輯器開啟每個 HTML 檔案，確認包含 9 個 meta 標籤（3 語言 × 3 欄位：name、description，但目前只用 name 和 description）
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發
 
 ---
 
