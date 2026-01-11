@@ -10,8 +10,8 @@
 - [x] 遷移 generator 到 packages 目錄
 - [x] 建立 Next.js 網站骨架
 - [x] 配置 Turborepo 任務管道
-- [ ] 執行驗收測試
-- [ ] 更新專案文件
+- [x] 執行驗收測試
+- [x] 更新專案文件
 
 ## 任務細節
 
@@ -128,7 +128,7 @@
 - `docs/specs/turborepo-migration/acceptance.feature` - Gherkin 格式驗收測試
 
 **實作備註**
-<!-- 執行過程中填寫 -->
+使用者自行驗收
 
 ---
 
@@ -144,7 +144,7 @@
 - `CLAUDE.md` - AI 助手的專案指引文件
 
 **實作備註**
-<!-- 執行過程中填寫 -->
+照預期開發
 
 ---
 

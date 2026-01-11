@@ -5,8 +5,8 @@ Ready-to-use note templates for Supernote e-ink devices. Download PNG files and 
 ## Available Templates
 
 Browse and download templates:
-- [**Nomad (A6 X2) Templates**](dist/nomad/) - 1404×1872 px
-- [**Manta (A5 X2) Templates**](dist/manta/) - 1920×2560 px
+- [**Nomad (A6 X2) Templates**](packages/generator/dist/nomad/) - 1404×1872 px
+- [**Manta (A5 X2) Templates**](packages/generator/dist/manta/) - 1920×2560 px
 
 ## How to Use
 
@@ -40,6 +40,55 @@ Current available templates:
 - `priority-todo.png` - Priority-based todo list with section headers
 
 More templates coming soon!
+
+## Project Structure
+
+This is a Turborepo monorepo with the following packages:
+
+```
+packages/
+├── generator/    # PNG template generator (HTML → PNG via Puppeteer)
+└── web/          # Next.js static website for template preview
+```
+
+## Development
+
+### Prerequisites
+
+- Node.js 18+
+- npm 9+
+
+### Installation
+
+```bash
+npm install
+```
+
+### Build All Packages
+
+```bash
+npm run build
+```
+
+This runs builds for all packages in parallel:
+- `@supernote-templates/generator`: Generates PNG files to `packages/generator/dist/`
+- `@supernote-templates/web`: Builds static site to `packages/web/out/`
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+### Build Individual Packages
+
+```bash
+# Generator only
+cd packages/generator && npm run build
+
+# Web only
+cd packages/web && npm run build
+```
 
 ## About This Project
 
