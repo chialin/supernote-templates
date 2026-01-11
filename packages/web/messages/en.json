@@ -16,6 +16,7 @@
   },
   "language": {
     "switcherLabel": "Language",
+    "switchLanguage": "Switch language",
     "en": "English",
     "zh-TW": "繁體中文",
     "ja": "日本語"

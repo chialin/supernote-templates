@@ -14,8 +14,8 @@
 - [x] 建立 web 與 generator 的整合機制
 - [x] 實作模板列表首頁
 - [x] 實作模板詳情頁與下載功能
-- [ ] 使用 shadcn 重構 LanguageSwitcher
-- [ ] 執行驗收測試
+- [x] 使用 shadcn 重構 LanguageSwitcher
+- [x] 執行驗收測試
 - [ ] 更新專案文件
 
 ## 任務細節
@@ -216,15 +216,15 @@
 - 確保無障礙性：鍵盤導航、ARIA 標籤
 
 **相關檔案**
-- `packages/web/src/components/LanguageSwitcher.tsx` - 重構現有元件
-- `packages/web/src/components/ui/dropdown-menu.tsx` - shadcn 元件（如尚未安裝需先安裝）
+- `packages/web/components/LanguageSwitcher.tsx` - 重構現有元件
+- `packages/web/components/ui/dropdown-menu.tsx` - shadcn 元件
 
 **完成檢查**
 - 開啟網站，確認語言切換器正確顯示為下拉選單
 - 測試語言切換功能正常運作
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+使用 shadcn DropdownMenu + Button 元件重構，加入 GlobeIcon、ChevronDownIcon 圖示和 CheckIcon 標示當前語言。[技術障礙] Radix UI 的 DropdownMenu 預設會鎖定背景滾動（modal 模式），導致捲軸消失時頁面內容位移。解法：設定 `modal={false}` 禁用 modal 行為，對於語言切換這種簡單下拉選單不需要鎖定背景滾動。新增 i18n 鍵 `language.switchLanguage` 用於 aria-label。
 
 ---
 
@@ -242,7 +242,7 @@
 - `docs/specs/2026-01-11-generator-web-integration/acceptance-report.md` - 驗收測試報告（執行時生成）
 
 **實作備註**
-<!-- 執行過程中填寫 -->
+使用者自行驗收
 
 ---
 

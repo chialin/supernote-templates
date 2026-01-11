@@ -3,6 +3,14 @@
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, Locale } from "@/i18n/routing";
+import { CheckIcon, ChevronDownIcon, GlobeIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function LanguageSwitcher() {
   const locale = useLocale();
@@ -15,22 +23,26 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex gap-2">
-      {routing.locales.map((loc) => (
-        <button
-          key={loc}
-          onClick={() => handleChange(loc)}
-          disabled={loc === locale}
-          className={`px-3 py-1 rounded text-sm transition-colors ${
-            loc === locale
-              ? "bg-zinc-800 text-white dark:bg-zinc-200 dark:text-black cursor-default"
-              : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
-          }`}
-          aria-current={loc === locale ? "true" : undefined}
-        >
-          {t(loc)}
-        </button>
-      ))}
-    </div>
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" aria-label={t("switchLanguage")}>
+          <GlobeIcon className="size-4" />
+          <span>{t(locale)}</span>
+          <ChevronDownIcon className="size-3.5" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {routing.locales.map((loc) => (
+          <DropdownMenuItem
+            key={loc}
+            onClick={() => handleChange(loc)}
+            className="justify-between"
+          >
+            {t(loc)}
+            {loc === locale && <CheckIcon className="size-4" />}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
