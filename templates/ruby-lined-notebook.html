@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby Lined Notebook</title>
+    <link rel="stylesheet" href="../styles/devices.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            padding: 0;
+            margin: 0;
+            width: var(--device-width);
+            height: var(--device-height);
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        #lines-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* Ruby-style line with furigana space above */
+        .ruby-line {
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        /* Upper section for furigana/ruby text - smaller height with dashed line */
+        .ruby-space {
+            height: 42px;
+            border-bottom: 1px dashed #888;
+        }
+
+        /* Main writing line - larger height with solid line */
+        .main-line {
+            height: 80px;
+            border-bottom: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="lines-container">
+            <!-- Template line that will be cloned to fill the page -->
+            <div class="ruby-line" id="line-template">
+                <div class="ruby-space"></div>
+                <div class="main-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto-fill Rows Helper -->
+    <script src="../scripts/auto-fill-rows.js"></script>
+    <script>
+        // Auto-fill ruby lines to fill remaining space
+        // Total row height = ruby-space (42px) + main-line (80px) = 122px
+        setupAutoFillRows({
+            containerId: 'lines-container',
+            templateId: 'line-template',
+            rowHeight: 122,
+            debug: true
+        });
+    </script>
+</body>
+</html>
