@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "PNG generator for Supernote e-ink device templates",
   "scripts": {
-    "generate": "node scripts/generate-all.js"
+    "build": "node scripts/generate-all.js"
   },
   "dependencies": {
     "puppeteer": "^24.26.1"

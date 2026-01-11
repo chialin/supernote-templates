@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "Multi-device Supernote template generator using HTML and Puppeteer",
+  "packageManager": "npm@11.4.1",
   "workspaces": ["packages/*"],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
-    "generate": "turbo run generate"
+    "dev": "turbo run dev"
   },
   "devDependencies": {
     "turbo": "^2.0.0"

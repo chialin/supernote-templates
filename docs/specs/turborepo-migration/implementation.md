@@ -9,7 +9,7 @@
 - [x] 建立 Turborepo 基礎架構
 - [x] 遷移 generator 到 packages 目錄
 - [x] 建立 Next.js 網站骨架
-- [ ] 配置 Turborepo 任務管道
+- [x] 配置 Turborepo 任務管道
 - [ ] 執行驗收測試
 - [ ] 更新專案文件
 
@@ -54,7 +54,7 @@
 - `packages/generator/styles/` - 移動的樣式檔案
 
 **完成檢查**
-- 在 `packages/generator/` 目錄執行 `npm run generate`，確認 PNG 產生成功
+- 在 `packages/generator/` 目錄執行 `npm run build`，確認 PNG 產生成功
 - 確認產生的 PNG 位於 `packages/generator/dist/` 目錄
 
 **實作備註**
@@ -95,24 +95,25 @@
 ### 配置 Turborepo 任務管道
 
 **實作要點**
+- 將 `packages/generator/package.json` 的 `generate` script 改名為 `build`（統一命名慣例）
 - 在根目錄執行 `npm install` 安裝所有 workspace 依賴
 - 配置 `turbo.json` 的 tasks：
-  - `generate`：outputs 為 `["dist/**"]`
-  - `build`：dependsOn 為 `["^build"]`，outputs 為 `[".next/**", "!.next/cache/**", "out/**"]`
+  - `build`：dependsOn 為 `["^build"]`，outputs 為 `["dist/**", ".next/**", "!.next/cache/**", "out/**"]`
   - `dev`：persistent 為 true，cache 為 false
-- 測試 `npm run generate` 從根目錄執行 generator
-- 測試 `npm run build` 從根目錄執行所有 build 任務
+- 更新根目錄 `package.json` scripts：移除 `generate`，只保留 `build` 和 `dev`
+- 測試 `npm run build` 從根目錄執行所有 build 任務（包含 generator 產生 PNG 和 web 建置）
 
 **相關檔案**
-- `turbo.json` - 更新任務管道配置
-- `package.json` - 確認根目錄 scripts 正確
+- `packages/generator/package.json` - 將 `generate` script 改為 `build`
+- `turbo.json` - 更新任務管道配置（移除 `generate` task）
+- `package.json` - 更新根目錄 scripts（移除 `generate`）
 
 **完成檢查**
-- 從根目錄執行 `npm run generate`，確認 `packages/generator/dist/` 產生 PNG
+- 從根目錄執行 `npm run build`，確認 `packages/generator/dist/` 產生 PNG
 - 從根目錄執行 `npm run build`，確認 `packages/web/out/` 產生靜態檔案
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+[技術障礙] Turborepo 2.7.3 要求 `packageManager` 欄位存在於根目錄 package.json，否則會報錯 "Could not resolve workspaces"。已新增 `"packageManager": "npm@11.4.1"` 解決。
 
 ---
 
@@ -173,8 +174,7 @@
   "workspaces": ["packages/*"],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
-    "generate": "turbo run generate"
+    "dev": "turbo run dev"
   },
   "devDependencies": {
     "turbo": "^2.0.0"
@@ -189,10 +189,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "out/**"]
-    },
-    "generate": {
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", "out/**"]
     },
     "dev": {
       "persistent": true,
@@ -208,7 +205,7 @@
   "name": "@supernote-templates/generator",
   "version": "1.0.0",
   "scripts": {
-    "generate": "node scripts/generate-all.js"
+    "build": "node scripts/generate-all.js"
   },
   "dependencies": {
     "puppeteer": "^24.26.1"
