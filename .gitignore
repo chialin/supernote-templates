@@ -3,3 +3,10 @@ dist/
 reference
 .claude/settings.local.json
 .playwright-mcp
+
+# Turborepo
+.turbo
+
+# Next.js
+.next
+out

@@ -1,14 +1,15 @@
 {
   "name": "supernote-templates",
   "version": "1.0.0",
+  "private": true,
   "description": "Multi-device Supernote template generator using HTML and Puppeteer",
-  "main": "scripts/convert-to-png.js",
+  "workspaces": ["packages/*"],
   "scripts": {
-    "generate": "node scripts/generate-all.js",
-    "generate:nomad": "node scripts/convert-to-png.js templates/daily-tasks.html nomad",
-    "generate:manta": "node scripts/convert-to-png.js templates/daily-tasks.html manta"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "generate": "turbo run generate"
   },
-  "dependencies": {
-    "puppeteer": "^24.26.1"
+  "devDependencies": {
+    "turbo": "^2.0.0"
   }
 }
