@@ -12,7 +12,7 @@
 - [x] 為現有模板加入 meta 標籤
 - [x] 修改 generator 建構流程以產生 templates.json
 - [x] 建立 web 與 generator 的整合機制
-- [ ] 實作模板列表首頁
+- [x] 實作模板列表首頁
 - [ ] 實作模板詳情頁與下載功能
 - [ ] 使用 shadcn 重構 LanguageSwitcher
 - [ ] 執行驗收測試
@@ -172,7 +172,7 @@
 - 執行 `npm run dev` 並開啟 http://localhost:3000/en，確認模板網格正確顯示
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發。建立 `lib/templates.ts` 資料存取層（含 TypeScript 類型定義），`components/TemplateCard.tsx` 模板卡片元件（使用 shadcn Card、Next.js Image），首頁改為 3/2/1 欄響應式網格。預覽圖使用 Nomad 版本、object-contain 保持比例，包含 hover 效果和空狀態處理。
 
 ---
 

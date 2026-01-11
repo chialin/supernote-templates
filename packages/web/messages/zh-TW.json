@@ -3,6 +3,10 @@
     "title": "Supernote 樣板",
     "description": "專為 Supernote 電子紙裝置設計的樣板集。瀏覽並下載適用於 Nomad (A6 X2) 和 Manta (A5 X2) 的樣板。"
   },
+  "templates": {
+    "empty": "目前沒有可用的樣板。",
+    "viewDetails": "查看詳情"
+  },
   "language": {
     "switcherLabel": "語言",
     "en": "English",

@@ -3,6 +3,10 @@
     "title": "Supernote テンプレート",
     "description": "Supernote 電子ペーパーデバイス向けに設計されたテンプレートコレクション。Nomad (A6 X2) と Manta (A5 X2) 用のテンプレートを閲覧・ダウンロードできます。"
   },
+  "templates": {
+    "empty": "現在利用可能なテンプレートはありません。",
+    "viewDetails": "詳細を見る"
+  },
   "language": {
     "switcherLabel": "言語",
     "en": "English",
