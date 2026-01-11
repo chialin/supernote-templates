@@ -48,7 +48,7 @@ This is a Turborepo monorepo with the following packages:
 ```
 packages/
 ├── generator/    # PNG template generator (HTML → PNG via Puppeteer)
-└── web/          # Next.js static website for template preview
+└── web/          # Next.js static website for template preview (supports English, 繁體中文, 日本語)
 ```
 
 ## Development

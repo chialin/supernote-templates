@@ -179,12 +179,29 @@ packages/
 │   │   └── manta/
 │   └── package.json
 └── web/                          # @supernote-templates/web
-    ├── app/                      Next.js App Router pages
+    ├── src/
+    │   ├── app/[locale]/         Localized pages (en, zh-TW, ja)
+    │   ├── components/           React components (LanguageSwitcher, etc.)
+    │   └── i18n/                 next-intl configuration
+    ├── messages/                 Translation JSON files (en.json, zh-TW.json, ja.json)
     ├── out/                      Static export output (gitignored)
     └── package.json
 turbo.json                        Turborepo configuration
 package.json                      Root workspace configuration
 ```
+
+## Web Package i18n
+
+The web package uses **next-intl** for internationalization with static export:
+
+- **Supported languages**: English (`en`), Traditional Chinese (`zh-TW`), Japanese (`ja`)
+- **URL structure**: All languages use path prefix (`/en`, `/zh-TW`, `/ja`), root `/` redirects to `/en`
+- **Key files**:
+  - `src/i18n/routing.ts` - Language routing configuration
+  - `src/i18n/request.ts` - Request configuration for static rendering
+  - `messages/*.json` - Translation files
+
+**Adding translations**: Edit `messages/{locale}.json` files. All locales must have the same key structure.
 
 ## Additional Context
 
