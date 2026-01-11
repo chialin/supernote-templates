@@ -11,7 +11,7 @@
 - [x] 移除 src 目錄層級
 - [x] 為現有模板加入 meta 標籤
 - [x] 修改 generator 建構流程以產生 templates.json
-- [ ] 建立 web 與 generator 的整合機制
+- [x] 建立 web 與 generator 的整合機制
 - [ ] 實作模板列表首頁
 - [ ] 實作模板詳情頁與下載功能
 - [ ] 使用 shadcn 重構 LanguageSwitcher
@@ -142,7 +142,7 @@
 - 確認 `packages/web/public/templates/` 目錄存在且包含 `nomad/`、`manta/`、`templates.json`
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+[技術障礙] npm workspace 中套件是 symlink 而非複製到 node_modules，導致原本的路徑找不到。修改 copy-templates.js 加入 fallback 機制，先嘗試 node_modules 路徑，失敗則直接讀取 sibling package 的 dist 目錄。
 
 ---
 

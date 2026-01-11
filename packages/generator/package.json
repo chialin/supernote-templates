@@ -2,6 +2,9 @@
   "name": "@supernote-templates/generator",
   "version": "1.0.0",
   "description": "PNG generator for Supernote e-ink device templates",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "node scripts/generate-all.js"
   },

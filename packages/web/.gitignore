@@ -17,6 +17,9 @@
 /.next/
 /out/
 
+# copied templates from generator (generated at build time)
+/public/templates/
+
 # production
 /build
 
