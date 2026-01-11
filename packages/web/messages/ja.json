@@ -5,7 +5,14 @@
   },
   "templates": {
     "empty": "現在利用可能なテンプレートはありません。",
-    "viewDetails": "詳細を見る"
+    "viewDetails": "詳細を見る",
+    "download": "ダウンロード",
+    "downloadFor": "{device} 版をダウンロード",
+    "backToList": "テンプレート一覧に戻る",
+    "devices": {
+      "nomad": "Nomad (A6 X2)",
+      "manta": "Manta (A5 X2)"
+    }
   },
   "language": {
     "switcherLabel": "言語",

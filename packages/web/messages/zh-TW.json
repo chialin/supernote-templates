@@ -5,7 +5,14 @@
   },
   "templates": {
     "empty": "目前沒有可用的樣板。",
-    "viewDetails": "查看詳情"
+    "viewDetails": "查看詳情",
+    "download": "下載",
+    "downloadFor": "下載 {device} 版本",
+    "backToList": "返回樣板列表",
+    "devices": {
+      "nomad": "Nomad (A6 X2)",
+      "manta": "Manta (A5 X2)"
+    }
   },
   "language": {
     "switcherLabel": "語言",

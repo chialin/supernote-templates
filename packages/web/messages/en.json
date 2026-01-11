@@ -5,7 +5,14 @@
   },
   "templates": {
     "empty": "No templates available yet.",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "download": "Download",
+    "downloadFor": "Download for {device}",
+    "backToList": "Back to templates",
+    "devices": {
+      "nomad": "Nomad (A6 X2)",
+      "manta": "Manta (A5 X2)"
+    }
   },
   "language": {
     "switcherLabel": "Language",
