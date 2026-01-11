@@ -7,7 +7,7 @@
 
 ## 任務概要
 
-- [ ] 安裝並設定 shadcn/ui
+- [x] 安裝並設定 shadcn/ui
 - [ ] 為現有模板加入 meta 標籤
 - [ ] 修改 generator 建構流程以產生 templates.json
 - [ ] 建立 web 與 generator 的整合機制
@@ -42,7 +42,7 @@
 - 在任一頁面 import Button 元件，確認可正常顯示
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+照預期開發。shadcn/ui 已初始化（style: new-york, base color: gray, CSS variables: yes），並安裝 button、card、dropdown-menu 元件。建構驗證通過。
 
 ---
 
