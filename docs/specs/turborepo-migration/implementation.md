@@ -8,7 +8,7 @@
 
 - [x] 建立 Turborepo 基礎架構
 - [x] 遷移 generator 到 packages 目錄
-- [ ] 建立 Next.js 網站骨架
+- [x] 建立 Next.js 網站骨架
 - [ ] 配置 Turborepo 任務管道
 - [ ] 執行驗收測試
 - [ ] 更新專案文件
@@ -88,7 +88,7 @@
 - 確認 `packages/web/out/` 目錄產生靜態 HTML 檔案
 
 **實作備註**
-<!-- 執行過程中填寫重要的技術決策、障礙和需要傳遞的上下文 -->
+[方向調整] create-next-app 互動式介面無法在 CLI 中自動執行，改由使用者手動在 terminal 執行。Next.js 16.1.1 預設啟用 React Compiler，保留此設定。
 
 ---
 
