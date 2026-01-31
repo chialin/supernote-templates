@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Planning</title>
+    <link rel="stylesheet" href="../styles/devices.css">
+
+    <!-- Template Metadata -->
+    <meta name="template:name:en" content="Morning Planning">
+    <meta name="template:name:zh-TW" content="晨間計劃">
+    <meta name="template:name:ja" content="朝の計画">
+    <meta name="template:description:en" content="A morning planning template with before-plan rituals, daily planning checklist, and mood/energy tracking at the footer.">
+    <meta name="template:description:zh-TW" content="晨間計劃模板，包含計劃前儀式、每日計劃清單，以及頁尾的心情與能量追蹤。">
+    <meta name="template:description:ja" content="計画前の儀式、日次計画チェックリスト、フッターの気分・エネルギー追跡を備えた朝の計画テンプレート。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            padding: 0;
+            margin: 0;
+            width: var(--device-width);
+            height: var(--device-height);
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #000;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .date-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: var(--font-size-md);
+        }
+
+        .date-input {
+            border: none;
+            border-bottom: 2px solid #000;
+            width: 200px;
+            padding: 2px 4px;
+            font-size: var(--font-size-md);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-height: 0;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-header {
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            border: 1px solid #000;
+            border-bottom: none;
+            letter-spacing: 1px;
+        }
+
+        .section-content {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        .info-box {
+            background-color: #f9f9f9;
+            border: 1px dashed #666;
+            padding: 10px 15px;
+            font-size: var(--font-size-md);
+            line-height: 1.6;
+        }
+
+        .task-list-area {
+            flex: 1;
+            min-height: 120px;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 39px,
+                #ddd 39px,
+                #ddd 40px
+            );
+            background-position: 0 0;
+        }
+
+        .lined-area {
+            height: 100%;
+        }
+
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .todo-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #000;
+            flex-shrink: 0;
+        }
+
+        .todo-text {
+            font-size: var(--font-size-md);
+            flex: 1;
+        }
+
+        .sub-item {
+            padding-left: 40px;
+        }
+
+        .sub-item .checkbox {
+            width: 22px;
+            height: 22px;
+        }
+
+        .sub-item .todo-text {
+            font-size: 20px;
+        }
+
+        /* Footer Section */
+        .footer {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 2px solid #000;
+        }
+
+        .mood-energy-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .tracker-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tracker-label {
+            font-size: var(--font-size-md);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .emoji-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .emoji-option {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .energy-bar {
+            display: flex;
+            gap: 8px;
+        }
+
+        .energy-level {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-md);
+            font-weight: bold;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">MORNING PLANNING</div>
+            <div class="date-section">
+                <span>Date</span>
+                <input type="text" class="date-input">
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Before-Plan Section -->
+            <div class="section">
+                <div class="section-header">BEFORE-PLAN</div>
+                <div class="section-content">
+                    <div class="todo-list">
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">手寫 3 分鐘日記</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">吃維他命</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                雜事先放到雜事清單，不要想到覺得簡單就先做
+            </div>
+
+            <!-- Plan Section -->
+            <div class="section">
+                <div class="section-header">PLAN</div>
+                <div class="section-content">
+                    <div class="todo-list">
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">開始第一個準備番茄鐘</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">反思昨日</div>
+                        </div>
+                        <div class="todo-item sub-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">評分昨天任務的喜歡程度</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">看日曆上今天的任務</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">將 email 清空，需要行動的轉成任務</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">確認待做、等待清單 @ 月誌</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">Plan today</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">Read a note randomly</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">回憶照片或美好的事情</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">提醒：「隨手記下想法」</div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="checkbox"></div>
+                            <div class="todo-text">有困擾時，可以使用「清空大腦-情緒筆記」模版來釐清想法</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 雜事清單 Section -->
+            <div class="section">
+                <div class="section-header">雜事清單</div>
+                <div class="section-content task-list-area">
+                    <div class="lined-area"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer: Mood & Energy -->
+        <div class="footer">
+            <div class="mood-energy-section">
+                <div class="tracker-group">
+                    <div class="tracker-label">MOOD</div>
+                    <div class="emoji-row">
+                        <div class="emoji-option">😢</div>
+                        <div class="emoji-option">😐</div>
+                        <div class="emoji-option">🙂</div>
+                        <div class="emoji-option">😊</div>
+                        <div class="emoji-option">😄</div>
+                    </div>
+                </div>
+                <div class="tracker-group">
+                    <div class="tracker-label">ENERGY</div>
+                    <div class="energy-bar">
+                        <div class="energy-level">1</div>
+                        <div class="energy-level">2</div>
+                        <div class="energy-level">3</div>
+                        <div class="energy-level">4</div>
+                        <div class="energy-level">5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

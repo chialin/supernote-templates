@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-Minute Journal - Morning</title>
+    <link rel="stylesheet" href="../styles/devices.css">
+
+    <!-- Template Metadata -->
+    <meta name="template:name:en" content="6-Minute Journal (Morning)">
+    <meta name="template:name:zh-TW" content="6 分鐘日記（早晨）">
+    <meta name="template:name:ja" content="6分間日記（朝）">
+    <meta name="template:description:en" content="Morning journaling template with gratitude list, daily intention, and positive affirmation sections.">
+    <meta name="template:description:zh-TW" content="早晨日記模板，包含感恩清單、讓這天變得很棒的方法、以及正向自我肯定區塊。">
+    <meta name="template:description:ja" content="感謝リスト、今日を素晴らしくする方法、ポジティブな自己肯定のセクションを備えた朝のジャーナルテンプレート。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+            background-color: #fffef5;
+            padding: 0;
+            margin: 0;
+            width: var(--device-width);
+            height: var(--device-height);
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-color: #fffef5;
+            padding: var(--safe-area-top) var(--safe-area-right) var(--safe-area-bottom) var(--safe-area-left);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px;
+        }
+
+        .title-section {
+            text-align: center;
+            flex: 1;
+        }
+
+        .title-sub {
+            font-style: italic;
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .title-main {
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .title-co {
+            font-size: 14px;
+            color: #999;
+            margin-top: 3px;
+        }
+
+        .date-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: var(--font-size-md);
+        }
+
+        .date-input {
+            border: none;
+            border-bottom: 2px solid #333;
+            width: 180px;
+            padding: 2px 4px;
+            font-size: var(--font-size-md);
+            background: transparent;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .section {
+            display: flex;
+            gap: 20px;
+        }
+
+        .section-label {
+            width: 200px;
+            font-size: var(--font-size-md);
+            font-weight: 500;
+            flex-shrink: 0;
+            padding-top: 5px;
+        }
+
+        .section-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .numbered-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .line-number {
+            font-size: var(--font-size-md);
+            font-weight: 500;
+            width: 30px;
+        }
+
+        .line-input {
+            flex: 1;
+            height: 30px;
+        }
+
+        .writing-lines {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .writing-line {
+            height: 45px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .writing-line:last-child {
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .quote-box {
+            background-color: #f5f0e0;
+            padding: 20px 25px;
+            text-align: center;
+            border-top: 3px solid #333;
+            border-bottom: 3px solid #333;
+        }
+
+        .quote-text {
+            font-size: var(--font-size-md);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .quote-author {
+            font-size: 18px;
+            text-align: right;
+            color: #666;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: #fffef5;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title-section">
+                <div class="title-sub">Believe</div>
+                <div class="title-main">YOURSELF</div>
+                <div class="title-co">— MORNING —</div>
+            </div>
+            <div class="date-section">
+                <span>日期：</span>
+                <input type="text" class="date-input">
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- 我很感恩 -->
+            <div class="section">
+                <div class="section-label">我很感恩...</div>
+                <div class="section-content">
+                    <div class="numbered-line">
+                        <span class="line-number">1.</span>
+                        <div class="line-input"></div>
+                    </div>
+                    <div class="numbered-line">
+                        <span class="line-number">2.</span>
+                        <div class="line-input"></div>
+                    </div>
+                    <div class="numbered-line">
+                        <span class="line-number">3.</span>
+                        <div class="line-input"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 我要讓這天變得很棒的方法 -->
+            <div class="section">
+                <div class="section-label">我要讓這天變得很棒的方法</div>
+                <div class="section-content">
+                    <div class="writing-lines">
+                        <div class="writing-line"></div>
+                        <div class="writing-line"></div>
+                        <div class="writing-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 正向自我肯定 -->
+            <div class="section">
+                <div class="section-label">正向自我肯定</div>
+                <div class="section-content">
+                    <div class="writing-lines">
+                        <div class="writing-line"></div>
+                        <div class="writing-line"></div>
+                        <div class="writing-line"></div>
+                        <div class="writing-line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Quote -->
+        <div class="footer">
+            <div class="quote-box">
+                <div class="quote-text">改變的秘訣不是把你全部精力集中於對抗舊的，而是要建立新的。</div>
+                <div class="quote-author">— 蘇格拉底</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
