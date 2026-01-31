@@ -1,5 +1,8 @@
 import templatesData from "@/public/templates/templates.json";
 
+// Get basePath for static assets (empty in dev, "/supernote-templates" in prod)
+const basePath = process.env.NODE_ENV === "production" ? "/supernote-templates" : "";
+
 export type Locale = "en" | "zh-TW" | "ja";
 
 export type TemplateI18n = {
@@ -43,7 +46,7 @@ export function getAllTemplateIds(): string[] {
  * Get the preview image path for a template (uses Nomad version)
  */
 export function getTemplatePreviewPath(templateId: string): string {
-  return `/templates/nomad/${templateId}.png`;
+  return `${basePath}/templates/nomad/${templateId}.png`;
 }
 
 /**
@@ -53,5 +56,5 @@ export function getTemplateDownloadPath(
   templateId: string,
   device: string
 ): string {
-  return `/templates/${device}/${templateId}.png`;
+  return `${basePath}/templates/${device}/${templateId}.png`;
 }
