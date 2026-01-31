@@ -41,10 +41,16 @@ async function convertHtmlToPng(htmlPath, deviceId) {
 
     let browser;
     try {
-        browser = await puppeteer.launch({
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+        const launchOptions = {
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        });
+        };
+        // Use system Chrome in CI environment
+        if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+            launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+        } else if (process.env.CI) {
+            launchOptions.channel = 'chrome';
+        }
+        browser = await puppeteer.launch(launchOptions);
         const page = await browser.newPage();
 
         // Set viewport size based on device configuration

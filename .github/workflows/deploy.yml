@@ -33,6 +33,7 @@ jobs:
           PUPPETEER_SKIP_DOWNLOAD: "true"
 
       - name: Setup Chrome for Puppeteer
+        id: setup-chrome
         uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
@@ -40,7 +41,7 @@ jobs:
       - name: Build all packages
         run: npm run build
         env:
-          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
