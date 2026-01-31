@@ -4,7 +4,9 @@ Ready-to-use note templates for Supernote e-ink devices. Download PNG files and 
 
 ## Available Templates
 
-**🌐 Visit our website to browse and download templates:** [supernote.yurenju.info](https://supernote.yurenju.info)
+**🌐 Browse and download templates:**
+- [chialin.github.io/supernote-templates](https://chialin.github.io/supernote-templates/)
+- [supernote.yurenju.info](https://supernote.yurenju.info)
 
 Or download directly from this repository:
 - [**Nomad (A6 X2) Templates**](packages/generator/dist/nomad/) - 1404×1872 px
@@ -41,6 +43,9 @@ That's it! No installation or technical setup required.
 - **Priority Todo** - Priority-based todo list with section headers
 - **Lined Notebook** - Simple lined notebook for note-taking
 - **Ruby Lined Notebook** - Lined notebook with ruby annotation space
+- **Morning Planning** - Daily planning template with schedule, priorities and goals
+- **6-Minute Journal (Morning)** - Morning journaling with gratitude and daily intentions
+- **6-Minute Journal (Evening)** - Evening reflection with accomplishments and lessons learned
 
 More templates coming soon!
 
